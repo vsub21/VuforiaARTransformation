@@ -73,6 +73,7 @@ public class ARTransformV2 : MonoBehaviour {
 
             offset = cubeViewPort - targetViewPort;
             Debug.Log("Offset is " + offset);
+            Debug.Log("Done toggling");
         }
     }
 
