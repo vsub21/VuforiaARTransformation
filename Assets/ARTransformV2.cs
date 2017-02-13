@@ -16,6 +16,10 @@ public class ARTransformV2 : MonoBehaviour {
     Camera camera;
 
     Vector3 offset;
+    Quaternion relativeRot;
+    Vector3 initTargetPos;
+    Vector3 currentTargetPos;
+    float delta_x;
 
     // Use this for initialization
     void Start () {
@@ -41,11 +45,14 @@ public class ARTransformV2 : MonoBehaviour {
         else if (isRotating)
         {
             Debug.Log("isRotating...");
+
+            transform.rotation = relativeRot * Quaternion.Inverse(target.transform.localRotation);
+
         }
         
         else if (isScaling)
         {
-            Debug.Log("isScaling...");
+
         }
         
     }
@@ -91,6 +98,16 @@ public class ARTransformV2 : MonoBehaviour {
             isTranslating = false;
             isRotating = true;
             isScaling = false;
+
+            Vector3 cubeViewPort = camera.WorldToViewportPoint(transform.position);
+            Debug.Log("cube is " + cubeViewPort + "triple away from origin");
+
+            Vector3 targetViewPort = camera.WorldToViewportPoint(target.transform.position);
+            Debug.Log("target is " + targetViewPort + "triple away from origin");
+
+            Debug.Log("Offset is " + offset);
+
+            relativeRot = target.transform.localRotation * transform.localRotation;
         }
     }
 
