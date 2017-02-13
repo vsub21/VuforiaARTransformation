@@ -30,7 +30,7 @@ sysinfo.txt
 *.unitypackage
 <<<<<<< HEAD
 
-# Keys
+# Vuforia Keys
 VuforiaConfiguration.asset*
 =======
 >>>>>>> 0bbfd38c164a73944e9a74843fa7f59b27d27f62
