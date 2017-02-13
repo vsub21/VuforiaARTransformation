@@ -143,4 +143,15 @@ public class ARTransformV2 : MonoBehaviour {
             initCubePos = transform.position;
         }
     }
+
+    public void reset()
+    {
+        isTranslating = false;
+        isRotating = false;
+        isScaling = false;
+
+        transform.position = new Vector3(0.0042f, 0.05299997f, 0.0397f);
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+        transform.localScale = new Vector3(0.08842495f, 0.08842495f, 0.08842495f);
+    }
 }
