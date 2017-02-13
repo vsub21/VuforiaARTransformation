@@ -16,10 +16,15 @@ public class ARTransformV2 : MonoBehaviour {
     Camera camera;
 
     Vector3 offset;
+
     Quaternion relativeRot;
+
     Vector3 initTargetPos;
+    Vector3 initCubePos;
     Vector3 currentTargetPos;
-    float delta_x;
+    
+    Vector3 oldScale;
+    Vector3 initScale;
 
     // Use this for initialization
     void Start () {
@@ -52,7 +57,13 @@ public class ARTransformV2 : MonoBehaviour {
         
         else if (isScaling)
         {
+            Debug.Log("isScaling...");
+            currentTargetPos = camera.WorldToViewportPoint(target.transform.position);
 
+            float delta_x;
+
+            delta_x = Mathf.Abs(currentTargetPos.x - initCubePos.x) - Mathf.Abs(initTargetPos.x - initCubePos.x);
+            transform.localScale = initScale + new Vector3(delta_x, delta_x, delta_x);
         }
         
     }
@@ -118,6 +129,7 @@ public class ARTransformV2 : MonoBehaviour {
         {
             Debug.Log("setting isScaling to false");
             isScaling = false;
+            // isFirstRunScale = true;
         }
         else
         {
@@ -125,6 +137,10 @@ public class ARTransformV2 : MonoBehaviour {
             isTranslating = false;
             isRotating = false;
             isScaling = true;
+
+            initTargetPos = camera.WorldToViewportPoint(target.transform.position);
+            initScale = transform.localScale;
+            initCubePos = transform.position;
         }
     }
 }
