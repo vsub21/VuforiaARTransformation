@@ -8,8 +8,6 @@ public class ARTransformV2 : MonoBehaviour {
     private bool isTranslating = false;
     private bool isScaling = false;
 
-    Transform mTargetTransform = null;
-
     GameObject target;
 
     GameObject other;
@@ -61,8 +59,14 @@ public class ARTransformV2 : MonoBehaviour {
             currentTargetPos = camera.WorldToViewportPoint(target.transform.position);
 
             float delta_x;
+            float direction;
 
-            delta_x = Mathf.Abs(currentTargetPos.x - initCubePos.x) - Mathf.Abs(initTargetPos.x - initCubePos.x);
+            if (initCubePos.x > initTargetPos.x)
+                direction = -1f;
+            else
+                direction = 1f;
+
+            delta_x = direction * (Mathf.Abs(currentTargetPos.x - initCubePos.x) - Mathf.Abs(initTargetPos.x - initCubePos.x));
             transform.localScale = initScale + new Vector3(delta_x, delta_x, delta_x);
         }
         
